@@ -100,8 +100,12 @@ plt.savefig("architecture.png")
 print("Validation set MSE before training")
 model.evaluate(x_valid, y_valid)
 
-#create log callback
-for file in os.listdir(os.path.join(os.getcwd(), "logs/fit/")):
+#create log directory if none exists
+log_path = os.path.join(os.getcwd(), "logs/fit/")
+if not os.path.exists(log_path):
+    os.makedirs(log_path)
+#wipe log directory
+for file in os.listdir(log_path):
     os.remove(file)
 log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_cb = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
