@@ -101,7 +101,8 @@ print("Validation set MSE before training")
 model.evaluate(x_valid, y_valid)
 
 #create log callback
-rm -rf ./logs/fit/
+for file in os.listdir("./logs/fit/"):
+    os.remove(file)
 log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_cb = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
