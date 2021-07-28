@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import datetime
 from tensorflow import keras
 import tensorflow as tf
 import kerasncp as kncp
@@ -85,7 +86,6 @@ model.compile(
 model.summary(line_length=100)
 
 # Plot the network architecture
-
 sns.set_style("white")
 plt.figure(figsize=(12, 12))
 legend_handles = rnn_cell.draw_graph(
@@ -100,9 +100,14 @@ plt.savefig("architecture.png")
 print("Validation set MSE before training")
 model.evaluate(x_valid, y_valid)
 
+#create log callback
+rm -rf ./logs/fit/
+log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_cb = keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
 # Train the model
 model.fit(
-    x=x_train, y=y_train, batch_size=32, epochs=20, validation_data=(x_valid, y_valid)
+    x=x_train, y=y_train, batch_size=32, epochs=20, validation_data=(x_valid, y_valid), callbacks=[tensorboard_cb]
 )
 
 # Evaluate the model again after the training
