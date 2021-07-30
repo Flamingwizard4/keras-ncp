@@ -88,7 +88,7 @@ def train_ncp(params):
 
     # Train the model
     history = model.fit(
-        x=x_train, y=y_train, batch_size=32, epochs=5, validation_data=(x_valid, y_valid), callbacks=[tensorboard_cb]
+        x=x_train, y=y_train, batch_size=32, epochs=20, validation_data=(x_valid, y_valid), callbacks=[tensorboard_cb]
     )
 
     # Evaluate the model again after the training
