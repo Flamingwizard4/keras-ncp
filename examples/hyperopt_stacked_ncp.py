@@ -69,7 +69,7 @@ def train_ncp(params):
     model.evaluate(x_valid, y_valid)
 
     #create log directory
-    tag_name = str(params['nI']) +'-'+ str(params['nC']) +'-'+ str(params['fS']) +'-'+ str(params['fI']) +'-'+ str(params['rC']) +'-'+ str(params['fM'])
+    tag_name = str(params['nI'])+'-'+str(params['nC'])+'-'+str(params['fS'])+'-'+str(params['fI'])+'-'+str(params['rC'])+'-'+str(params['fM'])
     log_path = os.path.join(os.getcwd(), "logs/fit/" + tag_name)
     if not os.path.exists(log_path):
         os.makedirs(log_path)
